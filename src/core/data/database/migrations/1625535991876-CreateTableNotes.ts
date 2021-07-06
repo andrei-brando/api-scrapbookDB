@@ -1,4 +1,4 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table, TableForeignKey } from "typeorm";
 
 export class CreateTableNotes1625535991876 implements MigrationInterface {
 
@@ -25,6 +25,11 @@ export class CreateTableNotes1625535991876 implements MigrationInterface {
           isNullable: false,
         },
         {
+          name: 'user_uid',
+          type: 'uuid',
+          isNullable: false,
+        },
+        {
           name: 'created_at',
           type: 'timestamp',
           isNullable: false,
@@ -34,6 +39,13 @@ export class CreateTableNotes1625535991876 implements MigrationInterface {
           type: 'timestamp',
           isNullable: false,
         },
+      ],
+      foreignKeys: [
+        new TableForeignKey({
+          columnNames: ['user_uid'],
+          referencedTableName: 'users',
+          referencedColumnNames: ['uid'],
+        }),
       ]
     }));
   }
