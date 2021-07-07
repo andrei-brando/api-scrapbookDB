@@ -2,6 +2,8 @@ import express from "express";
 import cors from 'cors';
 import Database from "../data/connections/Database";
 import NotesRoutes from "../../features/notes/routes/NotesRoutes";
+import UserRoutes from "../../features/users/routes/UserRoutes";
+import AuthRoutes from "../../features/authentication/routes/AuthRoutes";
 
 export default class App {
   readonly #express: express.Application;
@@ -33,8 +35,12 @@ export default class App {
 
   private routes() {
     const notesRoutes = new NotesRoutes().init();
+    const userRoutes = new UserRoutes().init();
+    const authRoutes = new AuthRoutes().init();
 
     this.#express.use(notesRoutes);
+    this.#express.use(userRoutes);
+    this.#express.use(authRoutes);
   }
 
   public start(port: any) {
