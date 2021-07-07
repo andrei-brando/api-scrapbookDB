@@ -3,8 +3,12 @@ import { Note } from "../../../core/data/database/entities/Note";
 
 export default class NotesController {
   public async index(request: Request, response: Response) {
+    const { userUid } = request.query;
+
     try {
-      const notes = await Note.find();
+      const notes = await Note.find({
+        where: { userUid }
+      });
 
       return response.status(200).json({
         success: true,
@@ -22,9 +26,12 @@ export default class NotesController {
 
   public async show(request: Request, response: Response) {
     const { uid } = request.params;
+    const { userUid } = request.body;
 
     try {
-      const note = await Note.findOne(uid);
+      const note = await Note.findOne(uid, {
+        where: { userUid }
+      });
 
       if (!note) {
         return response.status(200).json({
@@ -49,10 +56,10 @@ export default class NotesController {
   }
 
   public async store(request: Request, response: Response) {
-    const { description, details } = request.body;
+    const { userUid, description, details } = request.body;
 
     try {
-      const note = await new Note(description, details).save();
+      const note = await new Note(description, details, userUid).save();
 
       return response.status(200).json({
         success: true,
@@ -70,10 +77,12 @@ export default class NotesController {
 
   public async update(request: Request, response: Response) {
     const { uid } = request.params;
-    const { description, details } = request.body;
+    const { userUid, description, details } = request.body;
 
     try {
-      const newNote = await Note.findOne(uid);
+      const newNote = await Note.findOne(uid, {
+        where: { userUid }
+      });
 
       if (newNote) {
         newNote.description = description;
