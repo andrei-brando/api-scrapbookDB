@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import cors from 'cors';
 import Database from "../data/connections/Database";
 import NotesRoutes from "../../features/notes/routes/NotesRoutes";
@@ -37,6 +37,12 @@ export default class App {
     const notesRoutes = new NotesRoutes().init();
     const userRoutes = new UserRoutes().init();
     const authRoutes = new AuthRoutes().init();
+
+    this.#express.get('/', (request: Request, response: Response) => {
+      return response.json({
+        api: 'API-RODANDO'
+      });
+    });
 
     this.#express.use(notesRoutes);
     this.#express.use(userRoutes);
