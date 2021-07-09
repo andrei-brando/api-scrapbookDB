@@ -23,7 +23,7 @@
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only ./src/server.ts",
     "start": "node -r dotenv/config ./dist/server",
-    "prebuild": "./node_modules/typeorm/cli.js migration:run",
+    "prebuild": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "build": "npx tsc",
     "migration:run": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "migration:revert": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:revert"
