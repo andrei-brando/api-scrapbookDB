@@ -27,7 +27,7 @@
     "postbuild": "npm run migration:prod",
     "start": "node ./dist/server",
     "migration:run": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
-    "migration:prod": "cross-env NODE_ENV=production npx typeorm migration:run",
+    "migration:prod": "NODE_ENV=production npx typeorm migration:run",
     "migration:revert": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:revert"
   }
 }
