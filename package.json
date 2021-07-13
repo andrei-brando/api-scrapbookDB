@@ -26,7 +26,6 @@
     "build": "npx tsc",
     "postbuild": "npm run migration:prod",
     "start": "node -r dotenv/config ./dist/server",
-    "prebuild": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "migration:run": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "migration:prod": "cross-env NODE_ENV=production npx typeorm migration:run",
     "migration:revert": "ts-node-dev --transpile-only ./node_modules/typeorm/cli.js migration:revert"
