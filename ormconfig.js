@@ -4,8 +4,6 @@ const rootPath = process.env.NODE_ENV?.toLocaleLowerCase() === 'production'
   ? 'dist'
   : 'src';
 
-console.log(rootPath);
-
 module.exports = {
   type: "postgres",
   url: process.env.DATABASE_URL,
