@@ -4,6 +4,8 @@ const rootPath = process.env.NODE_ENV?.toLocaleLowerCase() === 'production'
   ? 'dist'
   : 'src';
 
+console.log(rootPath);
+
 module.exports = {
   type: "postgres",
   url: process.env.DATABASE_URL,
@@ -16,8 +18,8 @@ module.exports = {
     `${rootPath}/core/data/database/migrations/**/*`,
   ],
   cli: {
-    entitiesDir: `src/core/data/database/entities`,
-    migrationsDir: `src/core/data/database/migrations`,
+    entitiesDir: `${rootPath}/core/data/database/entities`,
+    migrationsDir: `${rootPath}/core/data/database/migrations`,
   },
   extra: {
     ssl: {
